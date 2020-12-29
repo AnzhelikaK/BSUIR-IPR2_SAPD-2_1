@@ -6,11 +6,17 @@ import lombok.Data;
 import static java.util.Objects.isNull;
 
 @Data
-@Builder(setterPrefix = "set")
+//@Builder
 public class Node {
     private int value;
     private Node left;
+    private boolean ltag = true;
     private Node right;
+    private boolean rtag = true;
+
+    public Node(int value) {
+        this.value = value;
+    }
 
     @Override
     public String toString() {
@@ -18,8 +24,8 @@ public class Node {
         String right = isNull(getRight()) ? " null" : " " + getRight().getValue();
         return "Node{" +
                 "value=" + value +
-                ", left=" + left +
-                ", right=" + right +
+                ", left=" + left + "ltag: " + ltag +
+                ", right=" + right + "rtag: " + rtag +
                 '}';
     }
 }

@@ -13,7 +13,7 @@ public class BinaryTree {
 
     public void add(int value) {
         if (isNull(root)) {
-            root = Node.builder().setValue(value).build();
+            root = new Node(value);
         } else {
             add(root, value);
         }
@@ -23,14 +23,14 @@ public class BinaryTree {
 
         if (value < node.getValue()) {
             if (isNull(node.getLeft())) {
-                node.setLeft(Node.builder().setValue(value).build());
+                node.setLeft(new Node(value));
             } else {
                 add(node.getLeft(), value);
             }
         }
         if (value > node.getValue()) {
             if (isNull(node.getRight())) {
-                node.setRight(Node.builder().setValue(value).build());
+                node.setRight(new Node(value));
             } else {
                 add(node.getRight(), value);
             }
@@ -134,7 +134,7 @@ public class BinaryTree {
                 return current; // if you try adding element, which is existed
             }
 
-        } else return Node.builder().setValue(value).build();
+        } else return new Node(value);
         return current;  // return updated Node, where children are inserted
     }
 
