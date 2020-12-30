@@ -1,31 +1,31 @@
 package com.kryvapust.binary_tree.files;
 
-import lombok.Builder;
 import lombok.Data;
-
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 @Data
-//@Builder
 public class Node {
     private int value;
     private Node left;
-    private boolean ltag = true;
+    private Boolean l_tag;
     private Node right;
-    private boolean rtag = true;
+    private Boolean r_tag;
 
     public Node(int value) {
         this.value = value;
+    }
+
+    public Node() {
     }
 
     @Override
     public String toString() {
         String left = isNull(getLeft()) ? " null" : " " + getLeft().getValue();
         String right = isNull(getRight()) ? " null" : " " + getRight().getValue();
-        return "Node{" +
-                "value=" + value +
-                ", left=" + left + "ltag: " + ltag +
-                ", right=" + right + "rtag: " + rtag +
-                '}';
+        String leftText = nonNull(getLeft()) ? ", left=" + left + " with ltag (is real connection): " + l_tag : ", left=" + left;
+        String rightText = nonNull(getRight()) ? ", right=" + right + " with rtag (is real connection): " + r_tag : ", right=" + right;
+
+        return "Node{" + "value=" + value + leftText + rightText + '}';
     }
 }

@@ -1,15 +1,12 @@
 package com.kryvapust.binary_tree.files;
 
-import lombok.Getter;
-import org.springframework.stereotype.Component;
-
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 public class BinaryTree {
-
-    @Getter
     private Node root;
+    private Node head;
+
 
     public void add(int value) {
         if (isNull(root)) {
@@ -17,6 +14,23 @@ public class BinaryTree {
         } else {
             add(root, value);
         }
+        initHead();
+    }
+
+//    public void addInSewnTree(int value) {
+//        if (isNull(root)) {
+//            root = new Node(value);
+//        } else {
+//            add(root, value);
+//        }
+//        initHead();
+//        stitchSymmetrically();
+//    }
+
+    private void initHead() {
+        head = new Node();
+        head.setLeft(root);
+        head.setRight(head);
     }
 
     private void add(Node node, int value) {
@@ -35,6 +49,44 @@ public class BinaryTree {
                 add(node.getRight(), value);
             }
         }
+    }
+
+    public void stitchSymmetrically() {
+        Node head = new Node();
+        head.setLeft(root);
+        Node predecessor = head;
+        Node current = head.getLeft();
+        head.setRight(head);
+        stitchLeft(current, predecessor);
+        stitchRight(current, predecessor);
+        System.out.println("finish sewing");
+    }
+
+    private void stitchLeft(Node current, Node predecessor) {
+        if (nonNull(current)) {
+            if (nonNull(current.getLeft())) {
+                current.setL_tag(true);
+                stitchLeft(current.getLeft(), predecessor);
+            } else {
+                current.setL_tag(false);
+                current.setLeft(predecessor);
+            }
+            predecessor = current;
+            stitchLeft(current.getRight(), predecessor);
+        }
+    }
+
+    private void stitchRight(Node current, Node predecessor) {
+// if (nonNull(current.getRight()) || current.getR_tag()) {
+        if (nonNull(current.getRight())) {
+            current.setR_tag(true);
+            stitchRight(current.getRight(), predecessor);
+        } else {
+            current.setR_tag(false);
+            current.setRight(predecessor);
+        }
+        predecessor = current;
+        if (current.getL_tag()) stitchRight(current.getLeft(), predecessor);
     }
 
     public void directPrint() {
@@ -58,6 +110,33 @@ public class BinaryTree {
             symmetricPrint(node.getLeft());
             System.out.println(node);
             symmetricPrint(node.getRight());
+        }
+    }
+
+    public void symmetricPrintSewn() {
+        Node p = head.getLeft();
+        symmetricPrintSewn(p);
+    }
+
+    private void symmetricPrintSewn(Node p) {
+        while (p.getL_tag()) {
+            p = p.getLeft();
+        }
+
+        while (p.getValue() != head.getValue()) {
+            System.out.println(p);
+            if (p.getR_tag()) {
+                p = p.getRight();
+                if (p.getL_tag()) {
+                    while (p.getL_tag()) {
+                        p = p.getLeft();
+                    }
+                }
+            } else {
+                p = p.getRight();
+                System.out.println(p);
+                p = p.getRight();
+            }
         }
     }
 
@@ -118,8 +197,9 @@ public class BinaryTree {
 
     // another way to add node in the tree
 
-    public Node insert(int value) {
-        return insert(root, value);
+    public void insert(int value) {
+        root=insert(root, value);
+        initHead();
 
     }
 

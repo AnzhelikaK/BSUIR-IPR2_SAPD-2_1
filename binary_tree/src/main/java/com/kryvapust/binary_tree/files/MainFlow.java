@@ -9,6 +9,33 @@ public class MainFlow {
 
     public void start() {
         BinaryTree tree;
+        tree = choseTree();
+        System.out.println("Direct print");
+        tree.directPrint();
+        System.out.println("Symmetric print");
+        tree.symmetricPrint();
+        System.out.println("Reverse print");
+        tree.reversePrint();
+        System.out.println("SEWN BINARY_TREE");
+        tree.stitchSymmetrically();
+        tree.symmetricPrintSewn();
+        System.out.println("Add element in sewn binary tree");
+//        tree.addInSewnTree(15);
+//        tree.addInSewnTree(14);
+//        tree.addInSewnTree(16);
+//        tree.symmetricPrintSewn();
+//        Node find = binaryTree.find(60);
+//        System.out.println(find);
+//
+//        binaryTree.delete(70);
+//        binaryTree.directPrint();
+
+
+    }
+
+
+    private BinaryTree choseTree() {
+        BinaryTree tree;
         Scanner in = new Scanner(System.in);
         System.out.print("Do you want to" +
                 "\noption 1: insert own BinaryTree " +
@@ -26,32 +53,20 @@ public class MainFlow {
             default:
                 tree = ownTree();
         }
-
-        System.out.println("Direct print");
-        tree.directPrint();
-        System.out.println("Symmetric print");
-        tree.symmetricPrint();
-        System.out.println("Reverse print");
-        tree.reversePrint();
-
-//        Node find = binaryTree.find(60);
-//        System.out.println(find);
-//
-//        binaryTree.delete(70);
-//        binaryTree.directPrint();
-
-
+        return tree;
     }
 
     private BinaryTree two() {
         BinaryTree tree = new BinaryTree();
-        tree.add(4);
-        tree.add(2);
-        tree.add(6);
-        tree.add(1);
-        tree.add(3);
-        tree.add(5);
-        tree.add(7);
+        tree.insert(5);
+        tree.insert(4);
+        tree.insert(6);
+        tree.insert(2);
+        tree.insert(8);
+        tree.insert(1);
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(9);
         return tree;
     }
 
