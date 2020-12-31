@@ -16,6 +16,12 @@ public class Node {
         this.value = value;
     }
 
+    public Node(int value, Boolean l_tag, Boolean r_tag) {
+        this.value = value;
+        this.l_tag = l_tag;
+        this.r_tag = r_tag;
+    }
+
     public Node() {
     }
 

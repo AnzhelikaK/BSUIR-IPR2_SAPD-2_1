@@ -8,31 +8,65 @@ import java.util.Scanner;
 public class MainFlow {
 
     public void start() {
+        // Task 1
+        System.out.println("_____DEMONSTRATION WORK WITH BINARY TREE_____ " +
+                "\n               / Задание 1 /");
         BinaryTree tree;
         tree = choseTree();
-        System.out.println("Direct print");
+        System.out.println("\n ~ Direct print (Прямой обход)");
         tree.directPrint();
-        System.out.println("Symmetric print");
-        tree.symmetricPrint();
-        System.out.println("Reverse print");
-        tree.reversePrint();
-        System.out.println("SEWN BINARY_TREE");
-        tree.stitchSymmetrically();
-        tree.symmetricPrintSewn();
-        System.out.println("Add element in sewn binary tree");
-//        tree.addInSewnTree(15);
-//        tree.addInSewnTree(14);
-//        tree.addInSewnTree(16);
-//        tree.symmetricPrintSewn();
-//        Node find = binaryTree.find(60);
-//        System.out.println(find);
-//
-//        binaryTree.delete(70);
-//        binaryTree.directPrint();
 
+        System.out.println("\n ~ Symmetric print (Симетричный обход)");
+        tree.symmetricPrint();
+
+        System.out.println("\n ~ Reverse print (Обратный обход)");
+        tree.reversePrint();
+
+        System.out.println("\n ~ FIND element (Процедура поиска элемента в бинарном дереве)");
+        int numberToFind = takeOneNumber("Value for finding");
+        Node foundElement = tree.find(numberToFind);
+        System.out.println(foundElement);
+
+        System.out.println("\n ~ ADD element in the Binary tree (Процедура вставки элемента в бинарное дерево)");
+        int numberToInsert = takeOneNumber("Value for addition");
+        tree.add(numberToInsert);
+        System.out.println("Result after addition new element in the Binary tree: ");
+        tree.symmetricPrint();
+
+        System.out.println("\n ~ DELETE element from the Binary tree (Процедура удаления элемента из бинарного дерева)");
+        int numberToDelete = takeOneNumber("Value for deletion");
+        tree.delete(numberToDelete);
+        System.out.println("Result after deletion element from the Binary tree: ");
+        tree.symmetricPrint();
+        // Task 2.1
+        System.out.println("\n_____SEWING BINARY TREE_____ " +
+                "\n        / Задание 2.1 /");
+        BinaryTree tree2;
+        tree2 = choseTree();
+        SewnBinaryTree sewnBinaryTree = new SewnBinaryTree(tree2);
+        sewnBinaryTree.sew();
+        System.out.println("\n ~ Result: symmetrically sewn Binary tree" +
+                "\n (Обход симметрично прошитого бинарного дерева согласно симметричному порядку следования элементов)");
+        sewnBinaryTree.print();
+
+        System.out.println("\n ~ FIND element in sewn tree (Процедура поиска элемента в бинарном прошитом дереве)");
+        int numberToFind2 = takeOneNumber("Value for finding");
+        Node foundElement2 = sewnBinaryTree.find(numberToFind2);
+        System.out.println(foundElement2);
+
+        System.out.println("\n ~ ADD element in the sewn Binary tree (Процедура вставки элемента в бинарное прошитое дерево)");
+        int numberToInsert2 = takeOneNumber("Value for addition");
+        sewnBinaryTree.insertInSewn(numberToInsert2);
+        System.out.println("Result after addition new element in the sewn Binary tree: ");
+        sewnBinaryTree.print();
 
     }
 
+    private int takeOneNumber(String text) {
+        System.out.print(text + ": ");
+        Scanner in = new Scanner(System.in);
+        return in.nextInt();
+    }
 
     private BinaryTree choseTree() {
         BinaryTree tree;
