@@ -2,19 +2,13 @@ package com.kryvapust.binary_tree.files;
 
 import static java.util.Objects.nonNull;
 
-public class SewnBinaryTree {
+public class initSewnBinaryTreeFromBinaryTree {
     private Node root;
     private Node head;
 
-    public SewnBinaryTree(BinaryTree binaryTree) {
+    public initSewnBinaryTreeFromBinaryTree(BinaryTree binaryTree) {
         this.root = binaryTree.getRoot();
         initHead();
-    }
-
-    private void initHead() {
-        head = new Node();
-        head.setLeft(root);
-        head.setRight(head);
     }
 
     public void sew() {
@@ -24,59 +18,9 @@ public class SewnBinaryTree {
         sewRight(current, predecessor);
     }
 
-    private void sewLeft(Node current, Node predecessor) {
-        if (nonNull(current)) {
-            if (nonNull(current.getLeft())) {
-                current.setL_tag(true);
-                sewLeft(current.getLeft(), predecessor);
-            } else {
-                current.setL_tag(false);
-                current.setLeft(predecessor);
-            }
-            predecessor = current;
-            sewLeft(current.getRight(), predecessor);
-        }
-    }
-
-    private void sewRight(Node current, Node predecessor) {
-        if (nonNull(current.getRight())) {
-            current.setR_tag(true);
-            sewRight(current.getRight(), predecessor);
-        } else {
-            current.setR_tag(false);
-            current.setRight(predecessor);
-        }
-        predecessor = current;
-        if (current.getL_tag()) sewRight(current.getLeft(), predecessor);
-    }
-
     public void print() {
         Node p = head.getLeft();
         symmetricPrintSewn(p);
-    }
-
-    private void symmetricPrintSewn(Node p) {
-        p = getLeftLeaf(p);
-        while (p.getValue() != head.getValue()) {
-            System.out.println(p);
-            if (p.getR_tag()) {
-                p = p.getRight();
-                if (p.getL_tag()) {
-                    p = getLeftLeaf(p);
-                }
-            } else {
-                p = p.getRight();
-                if (p.getValue() != head.getValue()) System.out.println(p);
-                p = p.getRight();
-            }
-        }
-    }
-
-    private Node getLeftLeaf(Node p) {
-        while (p.getL_tag()) {
-            p = p.getLeft();
-        }
-        return p;
     }
 
     public Node find(int value) {
@@ -108,11 +52,61 @@ public class SewnBinaryTree {
         sewAgain();
     }
 
-    public void sewAgain() {
-        Node predecessor = head;
-        Node current = head.getLeft();
-        stitchLeftAgain(current, predecessor);
-        stitchRightAgain(current, predecessor);
+
+    private void initHead() {
+        head = new Node();
+        head.setLeft(root);
+        head.setRight(head);
+    }
+
+    private void sewLeft(Node current, Node predecessor) {
+        if (nonNull(current)) {
+            if (nonNull(current.getLeft())) {
+                current.setL_tag(true);
+                sewLeft(current.getLeft(), predecessor);
+            } else {
+                current.setL_tag(false);
+                current.setLeft(predecessor);
+            }
+            predecessor = current;
+            sewLeft(current.getRight(), predecessor);
+        }
+    }
+
+    private void sewRight(Node current, Node predecessor) {
+        if (nonNull(current.getRight())) {
+            current.setR_tag(true);
+            sewRight(current.getRight(), predecessor);
+        } else {
+            current.setR_tag(false);
+            current.setRight(predecessor);
+        }
+        predecessor = current;
+        if (current.getL_tag()) sewRight(current.getLeft(), predecessor);
+    }
+
+    private void symmetricPrintSewn(Node p) {
+        p = getLeftLeaf(p);
+        while (p.getValue() != head.getValue()) {
+            System.out.println(p);
+            if (p.getR_tag()) {
+                p = p.getRight();
+                if (p.getL_tag()) {
+                    p = getLeftLeaf(p);
+                }
+            } else {
+                p = p.getRight();
+                if (p.getValue() != head.getValue()) System.out.println(p);
+                p = p.getRight();
+            }
+        }
+    }
+
+    private Node getLeftLeaf(Node p) {
+        while (p.getL_tag()) {
+            p = p.getLeft();
+        }
+        return p;
     }
 
     private Node insertInSewn(Node current, int value) {
@@ -135,6 +129,13 @@ public class SewnBinaryTree {
         return current;  // return updated Node, where children are inserted
     }
 
+
+    private void sewAgain() {
+        Node predecessor = head;
+        Node current = head.getLeft();
+        stitchLeftAgain(current, predecessor);
+        stitchRightAgain(current, predecessor);
+    }
 
     private void stitchLeftAgain(Node current, Node predecessor) {
         if (current.getL_tag()) {

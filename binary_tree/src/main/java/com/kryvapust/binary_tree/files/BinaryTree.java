@@ -17,6 +17,40 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * another way to add node in the tree
+     */
+    public void insert(int value) {
+        root = insert(root, value);
+    }
+
+    public void directPrint() {
+        directPrintNode(root);
+    }
+
+    public void symmetricPrint() {
+        symmetricPrint(root);
+    }
+
+    public void reversePrint() {
+        reversePrint(root);
+    }
+
+    public void delete(int value) {
+        root = delete(root, value);
+    }
+
+    public Node find(int value) {
+        Node current = root;
+        while (current != null) {
+            if (current.getValue() == value) {
+                break;
+            }
+            current = value < current.getValue() ? current.getLeft() : current.getRight();
+        }
+        return current;
+    }
+
     private void add(Node node, int value) {
         if (value < node.getValue()) {
             if (isNull(node.getLeft())) {
@@ -34,20 +68,12 @@ public class BinaryTree {
         }
     }
 
-    public void directPrint() {
-        directPrintNode(root);
-    }
-
     private void directPrintNode(Node node) {
         if (nonNull(node)) {
             System.out.println(node);
             directPrintNode(node.getLeft());
             directPrintNode(node.getRight());
         }
-    }
-
-    public void symmetricPrint() {
-        symmetricPrint(root);
     }
 
     private void symmetricPrint(Node node) {
@@ -58,9 +84,6 @@ public class BinaryTree {
         }
     }
 
-    public void reversePrint() {
-        reversePrint(root);
-    }
 
     private void reversePrint(Node node) {
         if (nonNull(node)) {
@@ -69,21 +92,6 @@ public class BinaryTree {
             System.out.println(node);
 
         }
-    }
-
-    public Node find(int value) {
-        Node current = root;
-        while (current != null) {
-            if (current.getValue() == value) {
-                break;
-            }
-            current = value < current.getValue() ? current.getLeft() : current.getRight();
-        }
-        return current;
-    }
-
-    public void delete(int value) {
-        root = delete(root, value);
     }
 
     private Node delete(Node node, int value) {
@@ -99,7 +107,7 @@ public class BinaryTree {
             } else {
                 Node mostLeftChild = mostLeftChild(node.getRight());
                 node.setValue(mostLeftChild.getValue());
-                node.setRight(delete(node.getRight(), node.getValue()));
+                node.setRight(delete(node.getRight(), node.getValue())); //
             }
         }
         return node;
@@ -111,13 +119,6 @@ public class BinaryTree {
             current = current.getLeft();
         }
         return current;
-    }
-
-    /**
-     * another way to add node in the tree
-     */
-    public void insert(int value) {
-        root = insert(root, value);
     }
 
     private Node insert(Node current, int value) {
@@ -132,6 +133,7 @@ public class BinaryTree {
             }
 
         } else return new Node(value);
+
         return current;  // return updated Node, where children are inserted
     }
 }
