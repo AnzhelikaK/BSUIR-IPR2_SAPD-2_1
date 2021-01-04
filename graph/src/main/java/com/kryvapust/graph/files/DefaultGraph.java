@@ -24,22 +24,22 @@ public class DefaultGraph extends Graph {
         Node node8 = new Node(8);
         Node node9 = new Node(9);
         List<Node> list = Arrays.asList(node1, node2, node3, node4, node5, node6, node7, node8, node9);
-        mas = new int[9][9];
-        mas[0][7] = 20;
-        mas[1][0] = 5;
-        mas[2][0] = 15;
-        mas[2][1] = 5;
-        mas[2][5] = 13;
-        mas[2][7] = 25;
-        mas[2][8] = 9;
-        mas[4][2] = 44;
-        mas[4][3] = 15;
-        mas[5][4] = 14;
-        mas[6][2] = 50;
-        mas[7][6] = 10;
-        mas[8][1] = 17;
-        mas[8][3] = 11;
-        helper.fillNodesFromMatrix(mas, list);
+        matrix = new int[9][9];
+        matrix[0][7] = 20;
+        matrix[1][0] = 5;
+        matrix[2][0] = 15;
+        matrix[2][1] = 5;
+        matrix[2][5] = 13;
+        matrix[2][7] = 25;
+        matrix[2][8] = 9;
+        matrix[4][2] = 44;
+        matrix[4][3] = 15;
+        matrix[5][4] = 14;
+        matrix[6][2] = 50;
+        matrix[7][6] = 10;
+        matrix[8][1] = 17;
+        matrix[8][3] = 11;
+        helper.fillNodesFromMatrix(matrix, list);
         return list;
     }
 }

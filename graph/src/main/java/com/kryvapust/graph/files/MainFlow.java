@@ -11,6 +11,7 @@ public class MainFlow {
     private final Helper helper;
     private final DefaultGraph defaultGraph;
     private final CreatedGraph createdGraph;
+    public static final int MAX = 10000;
 
     public MainFlow(Helper helper,
                     DefaultGraph defaultGraph,
@@ -20,8 +21,6 @@ public class MainFlow {
         this.createdGraph = createdGraph;
     }
 
-    public final int MAX = 10000;
-
     public void start() {
         Graph gr;
         gr = helper.useDefaultGraphs() ? defaultGraph : createdGraph;
@@ -29,13 +28,20 @@ public class MainFlow {
         System.out.println("Incident list");
         helper.printIncidentMatrix(graph);
         System.out.println("Adjacency matrix (Матрица смежности): ");
-        helper.printMatrix(gr.getMas());
+        helper.printMatrix(gr.getMatrix());
         int node_source = helper.getNumberOfSource();
-        System.out.println("_____________Dijkstra’s algorithm_________" +
-                "                             (Задание 1)");
 
-        countByDeikstra(graph, gr.getMas(), node_source);
+        System.out.println("_____________Dijkstra’s algorithm_________" +
+                "\n                             (Задание 1)");
+        countByDeikstra(graph, gr.getMatrix(), node_source);
         helper.printGraphWithSource(node_source, graph);
+
+        System.out.println("_____________Floyd's-Warshall's  algorithm_________" +
+                "\n                             (Задание 2)");
+        int[][] matrix = gr.prepareMatrixForFWAlg();
+        countByFloydWarshall(matrix);
+        helper.printMatrix(matrix);
+        helper.printMatrixWithText(matrix);
     }
 
     private void countByDeikstra(List<Node> graph, int[][] mas, int node_source) {
@@ -62,5 +68,23 @@ public class MainFlow {
 
     private Optional<Node> findMinNotVisited(List<Node> graph) {
         return graph.stream().filter(o -> !o.isVisited()).min(Comparator.comparing(Node::getWeight));
+    }
+
+
+    private void countByFloydWarshall(int[][] matrix) {
+        int n = matrix.length;
+        for (int k = 0; k < n; ++k) {
+            for (int i = 0; i < n; ++i) {
+                for (int j = 0; j < n; ++j) {
+                    if (matrix[i][k] < MAX && matrix[k][j] < MAX) {
+                        int sum = matrix[i][k] + matrix[k][j];
+                        if (matrix[i][j] > sum) {
+                            matrix[i][j] = sum;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

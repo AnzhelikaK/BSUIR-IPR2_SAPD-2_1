@@ -1,7 +1,5 @@
 package com.kryvapust.graph.files;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ public class CreatedGraph extends Graph {
         for (int i = 0; i < k; i++) {
             list.add(new Node(i + 1));
         }
-        mas = new int[k][k];
+        matrix = new int[k][k];
         System.out.println("Please, input weight of each edge between nodes. If edge is absent - input 0 as weight.");
         for (int i = 0; i < k; i++) {
             for (int j = 0; j < k; j++) {
@@ -35,10 +33,10 @@ public class CreatedGraph extends Graph {
                 if (sc.hasNext()) {
                     n = sc.nextInt();
                 }
-                mas[i][j] = n;
+                matrix[i][j] = n;
             }
         }
-        helper.fillNodesFromMatrix(mas, list);
+        helper.fillNodesFromMatrix(matrix, list);
         return list;
     }
 }
