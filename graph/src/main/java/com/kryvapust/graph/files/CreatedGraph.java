@@ -1,6 +1,7 @@
 package com.kryvapust.graph.files;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,12 +9,13 @@ import java.util.List;
 import java.util.Scanner;
 
 @Component
-@AllArgsConstructor
-public class CreatedGraph {
+public class CreatedGraph extends Graph {
+    public CreatedGraph(Helper helper) {
+        super(helper);
+    }
 
-    private final Helper helper;
-
-    public List<Node> getNewGraph() {
+    @Override
+    public List<Node> getGraph() {
         List<Node> list = new ArrayList<>();
         System.out.println("Please, input number of nodes in your graphs.");
         Scanner sc = new Scanner(System.in);
@@ -21,18 +23,11 @@ public class CreatedGraph {
         if (sc.hasNextInt()) {
             k = sc.nextInt();
         }
-        System.out.println("Input name for each node. Its name will be used for searching");
-        String name = "";
         for (int i = 0; i < k; i++) {
-            System.out.print(String.format("Name of %d : ", i + 1));
-            Scanner sc1 = new Scanner(System.in);
-            if (sc1.hasNextLine()) {
-                name = sc1.nextLine();
-                list.add(Node.builder().setNumber(i + 1).setSearchWord(name).build());
-            }
+            list.add(new Node(i + 1));
         }
-        int[][] mas = new int[k][k];
-        System.out.println("Please, input adjacency matrix. If number of node have edge - 1, not - 0.");
+        mas = new int[k][k];
+        System.out.println("Please, input weight of each edge between nodes. If edge is absent - input 0 as weight.");
         for (int i = 0; i < k; i++) {
             for (int j = 0; j < k; j++) {
                 System.out.print(String.format(" %d - %d : ", i + 1, j + 1));

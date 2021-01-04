@@ -8,19 +8,25 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter
-@Builder(setterPrefix = "set")
 public class Node {
     @NonNull
-    private int number;
-    @Setter
-    private List<Node> inputList;
+    private final int number;
     @Setter
     private List<Node> outputList;
     @NonNull
-    private String searchWord;
+    @Setter
+    @Getter
+    private boolean visited;
+    @Setter
+    @Getter
+    private int weight;
+
+    public Node(@NonNull int number) {
+        this.number = number;
+    }
 
     @Override
     public String toString() {
-        return String.format("Node { %d - %s }", number, searchWord);
+        return String.format("Node { %d }", number);
     }
 }

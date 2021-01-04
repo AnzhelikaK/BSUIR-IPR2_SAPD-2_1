@@ -21,9 +21,20 @@ public class Helper {
         return k == 2;
     }
 
-    public void printIncidentList(List<Node> graph) {
+    public int getNumberOfSource() {
+        System.out.println("Input number of Node which from you want to start search.");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Number: ");
+        int number = 0;
+        if (sc.hasNextInt()) {
+            number = sc.nextInt();
+        }
+        return number;
+    }
+
+    public void printIncidentMatrix(List<Node> graph) {
         System.out.println("Your nodes of graph: " + graph);
-        System.out.print("Incident List: ");
+        System.out.print("Incident List (Список инцидентности): ");
         for (Node node : graph) {
             System.out.print(String.format("\n { %d } : ", node.getNumber()));
             for (Node node_one : node.getOutputList()) {
@@ -35,48 +46,43 @@ public class Helper {
 
     public void fillNodesFromMatrix(int[][] mas, List<Node> graph) {
         for (Node node : graph) {
-            List<Node> inputList = getInputList(mas, node.getNumber() - 1, graph);
             List<Node> outputList = getOutputList(mas, node.getNumber() - 1, graph);
-            node.setInputList(inputList);
+
             node.setOutputList(outputList);
         }
-    }
-
-    private List<Node> getInputList(int[][] mas, int number, List<Node> graph) {
-        List<Node> inputList = new ArrayList<>();
-        for (int i = 0; i < mas.length; i++) {
-            if (mas[i][number] == 1) inputList.add(graph.get(i));
-        }
-        return inputList;
     }
 
     private List<Node> getOutputList(int[][] mas, int number, List<Node> graph) {
         List<Node> outputList = new ArrayList<>();
         for (int i = 0; i < mas.length; i++) {
-            if (mas[number][i] == 1) outputList.add(graph.get(i));
+            if (mas[number][i] != 0) outputList.add(graph.get(i));
         }
         return outputList;
     }
 
-    public String getSearchWord() {
-        System.out.println("Input word which you would like to  find in the graph.");
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Search word: ");
-        String word = "";
-        if (sc.hasNext()) {
-            word = sc.nextLine();
+    public void printMatrix(int[][] mas) {
+        int length = mas.length;
+        int length2 = mas[0].length;
+        System.out.print("     ");
+        for (int i = 0; i < length2; i++) {
+            System.out.print((i + 1) + "    ");
         }
-        return word;
+        System.out.println("\n");
+        for (int i = 0; i < length; i++) {
+            System.out.print((i + 1) + ": ");
+            for (int j = 0; j < length2; j++) {
+                int number = mas[i][j];
+                String str;
+                str = (number - 9 > 0) ? " " : "  ";
+                System.out.print("  " + number + str);
+            }
+            System.out.println("\n");
+        }
     }
 
-    public int getNumberOfNode() {
-        System.out.println("Input number of Node which from you want to start search.");
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Number: ");
-        int number = 0;
-        if (sc.hasNextInt()) {
-            number = sc.nextInt();
+    public void printGraphWithSource(int node_source, List<Node> graph) {
+        for (Node g : graph) {
+            System.out.println(String.format("Distance between source-node {%d} and node {%d} - %d", node_source, g.getNumber(), g.getWeight()));
         }
-        return number;
     }
 }
