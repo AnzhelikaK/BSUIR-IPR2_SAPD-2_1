@@ -65,7 +65,11 @@ public class MainFlow {
     private int takeOneNumber(String text) {
         System.out.print(text + ": ");
         Scanner in = new Scanner(System.in);
-        return in.nextInt();
+        int n=0;
+        if (in.hasNextInt()) {
+            n = in.nextInt();
+        }
+        return n;
     }
 
     private BinaryTree choseTree() {
