@@ -13,7 +13,6 @@ public class Node {
     private final int number;
     @Setter
     private List<Node> outputList;
-    @NonNull
     @Setter
     @Getter
     private boolean visited;

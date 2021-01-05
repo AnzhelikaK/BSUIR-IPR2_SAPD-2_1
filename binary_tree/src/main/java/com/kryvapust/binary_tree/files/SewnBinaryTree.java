@@ -26,7 +26,6 @@ public class SewnBinaryTree {
     public Node find(int value) {
         Node current = head.getLeft();
         current = getLeftLeaf(current);
-
         while (current.getValue() != head.getValue()) {
             if (current.getValue() == value) {
                 break;
