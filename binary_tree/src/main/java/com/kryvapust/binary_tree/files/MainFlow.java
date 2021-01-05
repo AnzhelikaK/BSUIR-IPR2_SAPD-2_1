@@ -43,7 +43,7 @@ public class MainFlow {
                 "\n        / Задание 2.1 /");
         BinaryTree tree2;
         tree2 = choseTree();
-        initSewnBinaryTreeFromBinaryTree sewnBinaryTree = new initSewnBinaryTreeFromBinaryTree(tree2);
+        SewnBinatyTree sewnBinaryTree = new SewnBinatyTree(tree2);
         sewnBinaryTree.sew();
         System.out.println("\n ~ Result: symmetrically sewn Binary tree" +
                 "\n (Обход симметрично прошитого бинарного дерева согласно симметричному порядку следования элементов)");

@@ -2,11 +2,11 @@ package com.kryvapust.binary_tree.files;
 
 import static java.util.Objects.nonNull;
 
-public class initSewnBinaryTreeFromBinaryTree {
+public class SewnBinatyTree {
     private Node root;
     private Node head;
 
-    public initSewnBinaryTreeFromBinaryTree(BinaryTree binaryTree) {
+    public SewnBinatyTree(BinaryTree binaryTree) {
         this.root = binaryTree.getRoot();
         initHead();
     }

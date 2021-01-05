@@ -103,7 +103,7 @@ public class Helper {
                     int number = matrix[i][j];
                     if (number == MAX) {
                         System.out.println(String.format("The shortest distance node between {%d} and node {%d} is absent and = %s", i + 1, j + 1, "\u221E"));
-                        System.out.println(String.format("   / (Кратчайшее расстояние между вершиной {%d} ивершиной {%d} не существует, т.е = %s)", i + 1, j + 1, "\u221E"));
+                        System.out.println(String.format("   / (Кратчайшее расстояние между вершиной {%d} и вершиной {%d} не существует, т.е = %s)", i + 1, j + 1, "\u221E"));
                         System.out.println("");
                     } else {
                         System.out.print(String.format("The shortest distance between node {%d} and node {%d} - %d", i + 1, j + 1, matrix[i][j]));
