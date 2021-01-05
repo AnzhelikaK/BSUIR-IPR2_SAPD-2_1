@@ -48,16 +48,10 @@ public class MainFlow {
         System.out.println("\n ~ Result: symmetrically sewn Binary tree" +
                 "\n (Обход симметрично прошитого бинарного дерева согласно симметричному порядку следования элементов)");
         sewnBinaryTree.print();
-
         System.out.println("\n ~ FIND element in sewn tree (Процедура поиска элемента в бинарном прошитом дереве)");
-        for (int i = 0; i < 10; i++) {
-
-
-            int numberToFind2 = takeOneNumber("Value for finding");
-            Node foundElement2 = sewnBinaryTree.find(numberToFind2);
-            System.out.println(foundElement2);
-        }
-
+        int numberToFind2 = takeOneNumber("Value for finding");
+        Node foundElement2 = sewnBinaryTree.find(numberToFind2);
+        System.out.println(foundElement2);
         System.out.println("\n ~ ADD element in the sewn Binary tree (Процедура вставки элемента в бинарное прошитое дерево)");
         int numberToInsert2 = takeOneNumber("Value for addition");
         sewnBinaryTree.insertInSewn(numberToInsert2);
