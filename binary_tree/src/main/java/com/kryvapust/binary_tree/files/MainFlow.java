@@ -50,9 +50,13 @@ public class MainFlow {
         sewnBinaryTree.print();
 
         System.out.println("\n ~ FIND element in sewn tree (Процедура поиска элемента в бинарном прошитом дереве)");
-        int numberToFind2 = takeOneNumber("Value for finding");
-        Node foundElement2 = sewnBinaryTree.find(numberToFind2);
-        System.out.println(foundElement2);
+        for (int i = 0; i < 10; i++) {
+
+
+            int numberToFind2 = takeOneNumber("Value for finding");
+            Node foundElement2 = sewnBinaryTree.find(numberToFind2);
+            System.out.println(foundElement2);
+        }
 
         System.out.println("\n ~ ADD element in the sewn Binary tree (Процедура вставки элемента в бинарное прошитое дерево)");
         int numberToInsert2 = takeOneNumber("Value for addition");
@@ -65,7 +69,7 @@ public class MainFlow {
     private int takeOneNumber(String text) {
         System.out.print(text + ": ");
         Scanner in = new Scanner(System.in);
-        int n=0;
+        int n = 0;
         if (in.hasNextInt()) {
             n = in.nextInt();
         }

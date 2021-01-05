@@ -31,18 +31,15 @@ public class SewnBinaryTree {
             if (current.getValue() == value) {
                 break;
             }
-
             if (current.getR_tag()) {
                 current = current.getRight();
                 current = getLeftLeaf(current);
             } else {
-                current = current.getRight();
                 if (current.getValue() == value) {
                     break;
                 }
                 current = current.getRight();
             }
-
         }
         return current.getValue() == head.getValue() ? null : current;
     }
@@ -88,13 +85,12 @@ public class SewnBinaryTree {
     private void symmetricPrintSewn(Node p) {
         p = getLeftLeaf(p);
         while (p.getValue() != head.getValue()) {
-            System.out.println(p);
             if (p.getR_tag()) {
-                p = p.getRight();
                 if (p.getL_tag()) {
                     p = getLeftLeaf(p);
                 }
             } else {
+                System.out.println(p);
                 p = p.getRight();
                 if (p.getValue() != head.getValue()) System.out.println(p);
                 p = p.getRight();
