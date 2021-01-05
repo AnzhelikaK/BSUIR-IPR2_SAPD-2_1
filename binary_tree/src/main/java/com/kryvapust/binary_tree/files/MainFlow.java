@@ -40,7 +40,7 @@ public class MainFlow {
         tree.symmetricPrint();
         // Task 2.1
         System.out.println("\n_____SEWING BINARY TREE_____ " +
-                "\n        / Задание 2.1 /");
+                "\n        / Задание 2 /");
         BinaryTree tree2;
         tree2 = choseTree();
         SewnBinaryTree sewnBinaryTree = new SewnBinaryTree(tree2);
