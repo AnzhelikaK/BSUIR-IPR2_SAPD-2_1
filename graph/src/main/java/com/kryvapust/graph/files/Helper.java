@@ -8,18 +8,21 @@ import java.util.Scanner;
 
 import static com.kryvapust.graph.files.MainFlow.MAX;
 
-@Component()
+@Component
 public class Helper {
 
-    public boolean useDefaultGraphs() {
-        System.out.println("Would you like to input personal new graph (option 1) or run program with default graph (option 2)? Fill on number");
-        System.out.print("Answer (1/2): ");
-        Scanner sc = new Scanner(System.in);
-        int k = 0;
-        if (sc.hasNext()) {
-            k = sc.nextInt();
-        }
+    Scanner sc;
 
+    public Helper() {
+        this.sc = new Scanner(System.in);
+
+    }
+
+    public boolean useDefaultGraphs() {
+        System.out.println("Would you like to input personal new graph (option 1) or run program with default graph (option 2)?" +
+                " Fill on number \nAnswer (1/2): ");
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
         return k == 2;
     }
 
@@ -27,11 +30,7 @@ public class Helper {
         System.out.println("Input number of Node which from you want to start search.");
         Scanner sc = new Scanner(System.in);
         System.out.print("Number: ");
-        int number = 0;
-        if (sc.hasNextInt()) {
-            number = sc.nextInt();
-        }
-        return number;
+        return sc.nextInt();
     }
 
     public void printIncidentMatrix(List<Node> graph) {
