@@ -34,15 +34,16 @@ public class Helper {
     }
 
     public void printIncidentMatrix(List<Node> graph) {
-        System.out.println("Your nodes of graph: " + graph);
-        System.out.print("Incident List (Список инцидентности): ");
+        String initMessage = String.format("Your nodes of graph: %s\nIncident List (Список инцидентности): ", graph);
+        StringBuffer message = new StringBuffer(initMessage);
         for (Node node : graph) {
-            System.out.print(String.format("\n { %d } : ", node.getNumber()));
+            message.append(String.format("\n { %d } : ", node.getNumber()));
             for (Node node_one : node.getOutputList()) {
-                System.out.print(String.format(" -> node {%d}", node_one.getNumber()));
+                message.append(String.format(" -> node {%d} ", node_one.getNumber()));
             }
         }
-        System.out.print("\n");
+        message.append("\n");
+        System.out.println(message.toString());
     }
 
     public void fillNodesFromMatrix(int[][] matrix, List<Node> graph) {
